@@ -1,0 +1,17 @@
+# Flutter / Dart build artifacts
+.dart_tool/
+.flutter-plugins
+.flutter-plugins-dependencies
+.packages
+build/
+
+# Android build artifacts
+android/.gradle/
+android/captures/
+android/gradleBuild/
+android/local.properties
+android/app/build/
+
+# IDE files
+.idea/
+*.iml*.hprof

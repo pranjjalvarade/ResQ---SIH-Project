@@ -1,0 +1,37 @@
+name: resq
+description: ResQ — Offline Disaster Mesh for Search and Rescue
+publish_to: 'none'
+version: 1.0.0+1
+
+environment:
+  sdk: '>=3.0.0 <4.0.0'
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+  # Google Nearby Connections — BLE + Wi-Fi Direct P2P mesh
+  nearby_connections: ^4.1.0
+
+  # Runtime permission management (Android 12+ BLE permissions)
+  permission_handler: ^11.3.1
+
+  # UUID v4 generation for packet deduplication
+  uuid: ^4.3.3
+
+  # GPS coordinates for SOS packets
+  geolocator: ^12.0.0
+
+  # Reactive state management
+  provider: ^6.1.2
+
+  # Timestamp formatting
+  intl: ^0.19.0
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^4.0.0
+
+flutter:
+  uses-material-design: true

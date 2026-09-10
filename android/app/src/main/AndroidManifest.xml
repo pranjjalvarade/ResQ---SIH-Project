@@ -1,0 +1,97 @@
+<manifest xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!-- ═══════════════════════════════════════════════════════════════════════
+         LOCATION — Required by Google Nearby Connections on all API levels
+    ════════════════════════════════════════════════════════════════════════ -->
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+
+    <!-- ═══════════════════════════════════════════════════════════════════════
+         BLUETOOTH — Legacy (API < 31) + Modern (API 31+)
+    ════════════════════════════════════════════════════════════════════════ -->
+    <!-- Legacy Bluetooth permissions (Android 11 and below) -->
+    <uses-permission
+        android:name="android.permission.BLUETOOTH"
+        android:maxSdkVersion="30" />
+    <uses-permission
+        android:name="android.permission.BLUETOOTH_ADMIN"
+        android:maxSdkVersion="30" />
+
+    <!-- Android 12+ granular Bluetooth permissions -->
+    <uses-permission android:name="android.permission.BLUETOOTH_SCAN"
+        android:usesPermissionFlags="neverForLocation" />
+    <uses-permission android:name="android.permission.BLUETOOTH_ADVERTISE" />
+    <uses-permission android:name="android.permission.BLUETOOTH_CONNECT" />
+
+    <!-- ═══════════════════════════════════════════════════════════════════════
+         WI-FI DIRECT — Required for Nearby Connections P2P_CLUSTER strategy
+    ════════════════════════════════════════════════════════════════════════ -->
+    <!-- Android 13+ replaces ACCESS_FINE_LOCATION for Wi-Fi scanning -->
+    <uses-permission android:name="android.permission.NEARBY_WIFI_DEVICES"
+        android:usesPermissionFlags="neverForLocation" />
+
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
+    <uses-permission android:name="android.permission.CHANGE_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+
+    <!-- ═══════════════════════════════════════════════════════════════════════
+         NEARBY CONNECTIONS — Core P2P infrastructure
+    ════════════════════════════════════════════════════════════════════════ -->
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+
+    <!-- Hardware features — declared as not required so app installs on
+         devices without BLE (graceful degradation) -->
+    <uses-feature
+        android:name="android.hardware.bluetooth_le"
+        android:required="false" />
+    <uses-feature
+        android:name="android.hardware.wifi.direct"
+        android:required="false" />
+
+    <application
+        android:label="ResQ"
+        android:name="${applicationName}"
+        android:usesCleartextTraffic="false"
+        android:requestLegacyExternalStorage="false">
+
+        <activity
+            android:name="io.flutter.embedding.android.FlutterActivity"
+            android:exported="true"
+            android:launchMode="singleTop"
+            android:taskAffinity=""
+            android:theme="@style/LaunchTheme"
+            android:configChanges="orientation|keyboardHidden|keyboard|screenSize|smallestScreenSize|locale|layoutDirection|fontScale|screenLayout|density|uiMode"
+            android:hardwareAccelerated="true"
+            android:windowSoftInputMode="adjustResize">
+            <!-- Specifies an Android theme to apply to this Activity as soon
+                 as the Android process has started. This theme is visible to
+                 the user while the Flutter UI initializes. After that, this
+                 theme continues to determine the Window background behind the
+                 Flutter UI. -->
+            <meta-data
+                android:name="io.flutter.embedding.android.NormalTheme"
+                android:resource="@style/NormalTheme" />
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <!-- Flutter deeplinking meta-data -->
+        <meta-data
+            android:name="flutterEmbedding"
+            android:value="2" />
+
+    </application>
+
+    <!-- Required for API 31+ to opt-in to queries across other packages
+         used by Nearby Connections -->
+    <queries>
+        <intent>
+            <action android:name="android.intent.action.VIEW" />
+        </intent>
+    </queries>
+
+</manifest>
